@@ -1613,6 +1613,10 @@ var server_blocks = {
     var response = e.response;
     var params = e.params;
     
+    if(response.error != undefined) {
+      $("#output").html(api.danger(response.error));
+    }
+    
     var blocks = response.blocks;
     
     var pages_list = pagination(response, "world/" + params.world + "/blocks");
