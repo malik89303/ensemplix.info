@@ -473,7 +473,7 @@ var info = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -599,7 +599,7 @@ var regions = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -665,7 +665,7 @@ var blocks = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -737,7 +737,7 @@ var regions_server = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -749,7 +749,7 @@ var regions_server = {
     var response = e.response;
     var params = e.params;
     
-    if(response.error != undefined) {
+    if(response && response.error != undefined) {
       $("#output").html(response.error);
       return;
     }
@@ -809,7 +809,7 @@ var region = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -871,7 +871,7 @@ var clans = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -962,7 +962,7 @@ var clan = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -1049,7 +1049,7 @@ var server_worlds = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -1139,7 +1139,7 @@ var server_blacklist = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -1214,7 +1214,7 @@ var warps_server = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -1282,7 +1282,7 @@ var server_news = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -1348,7 +1348,7 @@ var server_banlist = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -1426,7 +1426,7 @@ var server_shops = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -1512,7 +1512,7 @@ var server_files = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -1601,7 +1601,7 @@ var server_blocks = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -1613,7 +1613,7 @@ var server_blocks = {
     var response = e.response;
     var params = e.params;
     
-    if(response.error != undefined) {
+    if(response && response.error != undefined) {
       $("#output").html(api.danger(response.error));
     }
     
@@ -1677,7 +1677,7 @@ var player_warps = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -1753,7 +1753,7 @@ var warp = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -1815,7 +1815,7 @@ var violations = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -1892,7 +1892,7 @@ var coord_blocks = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -1969,7 +1969,7 @@ var coord_shops = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -2057,7 +2057,7 @@ var shops = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -2150,7 +2150,7 @@ var coord_regions = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
@@ -2223,7 +2223,7 @@ var coord_warps = {
       error: function (e) {
         response = e.responseJSON;
         
-        if(response.error != undefined) {
+        if(response && response.error != undefined) {
           $("#output").html(api.danger(response.error));
         } else {
           $("#output").html(api.danger("Ошибка"));
