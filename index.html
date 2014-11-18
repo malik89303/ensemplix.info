@@ -2849,14 +2849,14 @@ function magic() {
   var view = webPattern(urls, hash);
   
   if(view == false) {
-    document.title = "Ошибка";
+    document.title = "Ensemplix INFO - Ошибка";
     $("#breadcrumb").html("<ol class='breadcrumb'><li><a href='#'>Главная</a></li></ol>");
     $("#output").html(api.danger("Отсутствует контроллер для " + hash));
     
     return;
   }
   
-  document.title = view['name'];
+  document.title = "Ensemplix INFO - " + view['name'];
   
   $("#breadcrumb").html(""
     + "<ol class='breadcrumb'>"
