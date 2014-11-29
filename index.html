@@ -996,10 +996,10 @@ var clan = {
       
       clan_members.push(""
         + "<div class='col-sm-4'><ul class='media-list'><li class='media'>"
-        + "<img class='media-object pull-left' src='https://ensemplix.ru/images/logos/" + member['player'] + ".png' alt='" + member['player'] + " logo' style='min-height:48px;min-width:48px;max-width:48px;' onerror=\"this.src='https://ensemplix.ru/images/logos/default.jpg';\" />"
+        + "<img class='media-object pull-left' src='https://ensemplix.ru/images/logos/" + member['player'] + ".png' alt='" + member['player'] + " logo' style='width:48px;' onerror=\"this.src='https://ensemplix.ru/images/logos/default.jpg';\" />"
         + "<div class='media-body'><h4 class='media-heading'><a href='#player/" + encodeURIComponent(member['player']) + "'>" + member['player'] + "</a></h4>"
           + "<small>" + api.time(member['joined']) + "</small><br/>"
-          + (member['invite'] ? "<small>права на инвайт</small>" : "")
+          + (member['invite'] ? "<span class='label label-default'>права на инвайт</span>" : "")
           + "<br/>"
         + "</div>"
         + "</li></ul></div>");
