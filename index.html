@@ -386,8 +386,7 @@ function regionParse(region, params) {
 
   var result = "<li class='list-group-item'"+removed_region_highlight+"><b>Регион:</b> " + api.region(region['region'], region['world'])
     + ", <span class='glyphicon glyphicon-globe'></span> <b>" + api.world(region['world']) + "</a></b>"
-
-    +", <span class='glyphicon glyphicon-map-marker'></span> " + api.coord(xcenter + "," + ycenter + "," + zcenter, region.world)
+    + (ycenter == 0 ? "" : ", <span class='glyphicon glyphicon-map-marker'></span> " + api.coord(xcenter + "," + ycenter + "," + zcenter, region.world) )
     +removed_region
     +"<br/>"
     +"<span style='display:inline-block;float:right;'>"+region_status+"</span>"
@@ -397,7 +396,7 @@ function regionParse(region, params) {
     +(region['flags'].length==0?"":"<b>Флаги:</b> "+region['flags'].join(", ")+"<br/>")
     +(region['parent']==null?"":"<b>Глобальный регион:</b> "+api.region(region['parent']['parent'] || region['parent'], region['world'])+"<br/>")
     +(children!=""?"<b>Локальные регионы:</b> "+children.join(", ")+"<br/>":"")
-    +"<b>Объем:</b> "+(xlength+1)+"&times;"+(ylength+1)+"&times;"+(zlength+1)+" = "+region_volume+" блок(ов)<br/>"
+    + (ycenter == 0 ? "" : "<b>Объем:</b> "+(xlength+1)+"&times;"+(ylength+1)+"&times;"+(zlength+1)+" = "+region_volume+" блок(ов)<br/>")
     +"<b>Дата создания:</b> "+api.time(region.created)+"</li>";
   
   return result;
