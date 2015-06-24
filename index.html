@@ -60,7 +60,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">Ensemplix INFO <sup>beta</sup></a>
+      <a class="navbar-brand" href="#">Ensemplix INFO <sup>beta</sup></a>
     </div>
   
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -438,6 +438,29 @@ function blockParse(block) {
       + "</td>"
       + "<td>" + api.time(block['created']) + "</td>"
     + "</tr>";
+  
+  return result;
+}
+
+function warpParse(warp) {
+  // затенение удаленных миров (серверов)
+  var removed_serv = "";
+  var removed_serv_highlight = "";
+  if(!whitelist.test(warp['world'])) {
+    removed_serv_highlight = " style='opacity:.6;'";
+    removed_serv = "<b style='display:inline-block;float:right;'> МИР УДАЛЕН</b>";
+  }
+  
+  var result = "<li class='list-group-item'" + removed_serv_highlight + ">"
+      + "<b>Варп:</b> " + api.warp(warp['warp'], warp['world']) + ", "
+      + "<span class='glyphicon glyphicon-globe'></span> " + api.world(warp['world']) + ", "
+      + "<span class='glyphicon glyphicon-map-marker'></span> " + api.coord(Math.round(warp['x']) + "," + Math.round(warp['y']) + "," + Math.round(warp['z']), warp['world'])
+      + removed_serv
+      + "<br/>"
+      + "<b>Владелец:</b> " + api.player(warp['owner'], true) + "<br/>"
+      + "<b>Дата создания:</b> " + api.time(warp['created'])
+      + (warp['greeting'] == null ? "" : "<br/><br/><span class='mc mc-textarea'>" + mcChat(warp['greeting']) + "</span>")
+    + "</li>";
   
   return result;
 }
@@ -1236,24 +1259,7 @@ var warps_server = {
     for(var x = 0; x < warps.length; x++) {
       var warp = warps[x];
       
-      // затенение регионов из удаленных миров (серверов)
-      var removed_serv = "";
-      var removed_serv_highlight = "";
-      if(!whitelist.test(warp['world'])) {
-        removed_serv_highlight = " style='opacity:.6;'";
-        removed_serv = "<b style='display:inline-block;float:right;'> МИР УДАЛЕН</b>";
-      }
-      
-      result += "<li class='list-group-item'" + removed_serv_highlight + ">"
-          + "<b>Варп:</b> " + api.warp(warp['warp'], warp['world']) + ", "
-          + "<span class='glyphicon glyphicon-globe'></span> " + api.world(warp['world']) + ", "
-          + "<span class='glyphicon glyphicon-map-marker'></span> " + api.coord(Math.round(warp['x']) + "," + Math.round(warp['y']) + "," + Math.round(warp['z']), warp['world'])
-          + removed_serv
-          + "<br/>"
-          + "<b>Владелец:</b> " + api.player(warp['owner'], true) + "<br/>"
-          + "<b>Дата создания:</b> " + api.time(warp['created'])
-          + (warp['greeting'] == null ? "" : "<br/><br/><span class='mc mc-textarea pull-right'>" + mcChat(warp['greeting']) + "</span>")
-        + "</li>";
+      result += warpParse(warp);
     }
     result = "<div class='panel panel-default'>" + pages_list + "<ul class='list-group'>" + result + "</ul>" + pages_list + "</div>";
     
@@ -1706,20 +1712,7 @@ var player_warps = {
     
     var result = "";
     for(var x = 0; x < warps.length; x++) {
-      var warp = warps[x];
-      
-      result += "<li class='list-group-item'>"
-          //+ "<b>Варп:</b> <a href='#world/" + warp['world'] + "/warp/" + encodeURI(warp['warp']) + "'>" + warp['warp'] + "</a>, "
-          + "<b>Варп:</b> " + api.warp(warp['warp'], warp['world']) + ", "
-          //+ "<span class='glyphicon glyphicon-globe'></span> <a href='#world/" + warp['world'] + "'>" + warp['world'] + "</a>, "
-          + "<span class='glyphicon glyphicon-globe'></span> " + api.world(warp['world']) + "</a>, "
-          + "<span class='glyphicon glyphicon-map-marker'></span> " + api.coord(Math.round(warp['x']) + "," + Math.round(warp['y']) + "," + Math.round(warp['z']), warp['world']) + ""
-          + (warp['greeting'] == null ? "" : "<span class='mc mc-textarea pull-right'>" + mcChat(warp['greeting']) + "</span>")
-          + "<br/>"
-          //+ "<b>Владелец:</b> <a href='#player/" + warp['owner'] + "'>" + warp['owner'] + "</a><br/>"
-          + "<b>Владелец:</b> " + api.player(warp['owner'], true) + "<br/>"
-          + "<b>Дата создания:</b> " + api.time(warp['created'])
-        + "</li>";
+      result += warpParse(warps[x]);
     }
     result = "<div class='panel panel-default'>" + pages_list + "<ul class='list-group'>" + result + "</ul>" + pages_list + "</div>";
     
@@ -1775,17 +1768,7 @@ var warp = {
     var response = e.response;
     var params = e.params;
     
-    var warp = response;
-    
-    var result = "<ul class='list-group'><li class='list-group-item'>"
-        + "<b>Варп:</b> " + api.warp(warp['warp'], warp['world']) + ", "
-        + "<span class='glyphicon glyphicon-globe'></span> " + api.world(warp['world']) + ", "
-        + "<span class='glyphicon glyphicon-map-marker'></span> " + api.coord(Math.round(warp['x']) + "," + Math.round(warp['y']) + "," + Math.round(warp['z']), warp['world'])
-        + (warp['greeting'] == null ? "" : "<span class='mc mc-textarea pull-right'>" + mcChat(warp['greeting']) + "</span>")
-        + "<br/>"
-        + "<b>Владелец:</b> " + api.player(warp['owner'], true) + "<br/>"
-        + "<b>Дата создания:</b> " + api.time(warp['created'])
-      + "</li></ul>";
+    var result = "<ul class='list-group'>" + warpParse(response) + "</ul>";
     
     $('#output').html(result);
   },
@@ -2252,17 +2235,7 @@ var coord_warps = {
     
     var result = "";
     for(var x = 0; x < warps.length; x++) {
-      var warp = warps[x];
-      
-      result += "<li class='list-group-item'>"
-          + "<b>Варп:</b> " + api.warp(warp['warp'], warp['world']) + ", "
-          + "<span class='glyphicon glyphicon-globe'></span> " + api.world(warp['world']) + ", "
-          + "<span class='glyphicon glyphicon-map-marker'></span> " + api.coord(Math.round(warp['x']) + "," + Math.round(warp['y']) + "," + Math.round(warp['z']), warp['world'])
-          + (warp['greeting'] == null ? "" : "<span class='mc mc-textarea pull-right'>" + mcChat(warp['greeting']) + "</span>")
-          + "<br/>"
-          + "<b>Владелец:</b> " + api.player(warp['owner'], true) + "<br/>"
-          + "<b>Дата создания:</b> " + api.time(warp['created'])
-        + "</li>";
+      result += warpParse(warps[x]);
     }
     result = "<div class='panel panel-default'>" + pages_list + "<ul class='list-group'>" + result + "</ul>" + pages_list + "</div>";
     
