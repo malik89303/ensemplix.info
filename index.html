@@ -367,9 +367,10 @@ function regionParse(region, params) {
   // затенение регионов из удаленных миров (серверов)
   var removed_region = "";
   var removed_region_highlight = "";
-  var whitelist = new RegExp("^(Sandbox|CarnageR5|Davids|Amber|DIM7|DIM1|DIM-1)($|_)");
-  // DIM1 - Amber The End
-  // DIM-1 - Amber Nether
+  var whitelist = new RegExp("^(Sandbox|DavidsR3|AmberR2|DIM7|DIM1|DIM-1)($|_)");
+  // DIM1 - Amber/Davids The End
+  // DIM-1 - Amber/Davids Nether
+  // DIM7 - Twilight Forest
   if(!whitelist.test(region.world)) {
     removed_region_highlight = " style='opacity:.6;'";
     removed_region = "<b style='display:inline-block;float:right;'> МИР УДАЛЕН</b>";
