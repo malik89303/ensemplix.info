@@ -327,7 +327,7 @@ $.ajax("http://api.ensemplix.ru/v2/server/game/", {
   success: function (e) {
     var worlds = [];
     for(var x = 0; x < e.length; x++) {
-      worlds.push(a[x]['world']);
+      worlds.push(e[x]['world']);
     }
     worlds.concat(["DIM7","DIM1","DIM-1"]);
     whitelist = new RegExp("^(" + worlds.join("|")  + ")($|_nether|_the_end)");
