@@ -326,7 +326,7 @@ $.ajax("http://api.ensemplix.ru/v2/server/game/", {
   cache: false,
   success: function (e) {
     var worlds = [];
-    for(var x = 0; x < a.length; x++) {
+    for(var x = 0; x < e.length; x++) {
       worlds.push(a[x]['world']);
     }
     worlds.concat(["DIM7","DIM1","DIM-1"]);
