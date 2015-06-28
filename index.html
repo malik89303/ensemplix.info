@@ -312,10 +312,27 @@ function mcChat(str) {
     .replace(/§[0-9a-fklmnor]/ig, "");
 }
 
-var whitelist = new RegExp("^(Sandbox|DavidsR3|AmberR2|DIM7|DIM1|DIM-1)($|_)");
-// DIM1 - Amber/Davids The End
-// DIM-1 - Amber/Davids Nether
-// DIM7 - Twilight Forest
+/*
+// Названия миров состоянием на 28 июня 2015
+// СЕРВЕР   SURFACE   NETHER          END              TWILIGHT FOREST
+// Amber    AmberR2   DIM-1           DIM1             DIM7
+// Davids   DavidsR3  DIM-1           DIM1
+// Sandbox  Sandbox   Sandbox_nether  Sandbox_the_end
+*/
+var worlds = ["Sandbox","DavidsR3","AmberR2","DIM-1","DIM1","DIM7"];
+var whitelist = new RegExp("^(" + worlds.join("|")  + ")($|_nether|_the_end)");
+
+$.ajax("http://api.ensemplix.ru/v2/server/game/", {
+  cache: false,
+  success: function (e) {
+    var worlds = [];
+    for(var x = 0; x < a.length; x++) {
+      worlds.push(a[x]['world']);
+    }
+    worlds.concat(["DIM7","DIM1","DIM-1"]);
+    whitelist = new RegExp("^(" + worlds.join("|")  + ")($|_nether|_the_end)");
+  }
+});
 
 function regionParse(region, params) {
   var player_regexp = RegExp("^"+params['player']+"$", "i");
@@ -369,12 +386,12 @@ function regionParse(region, params) {
     owners = owners.join(", ");
   }
   
-  // затенение регионов из удаленных миров (серверов)
-  var removed_region = "";
-  var removed_region_highlight = "";
+  // затенение из удаленных миров (серверов)
+  var removed_serv = "";
+  var removed_serv_highlight = "";
   if(!whitelist.test(region.world)) {
-    removed_region_highlight = " style='opacity:.6;'";
-    removed_region = "<b style='display:inline-block;float:right;'> МИР УДАЛЕН</b>";
+    removed_serv_highlight = " style='opacity:.6;'";
+    removed_serv = "<b style='display:inline-block;float:right;'> МИР УДАЛЕН</b>";
   }
 
   var children = "";
@@ -386,10 +403,10 @@ function regionParse(region, params) {
   }
   
 
-  var result = "<li class='list-group-item'"+removed_region_highlight+"><b>Регион:</b> " + api.region(region['region'], region['world'])
+  var result = "<li class='list-group-item'"+removed_serv_highlight+"><b>Регион:</b> " + api.region(region['region'], region['world'])
     + ", <span class='glyphicon glyphicon-globe'></span> <b>" + api.world(region['world']) + "</a></b>"
     + (ycenter == 0 ? "" : ", <span class='glyphicon glyphicon-map-marker'></span> " + api.coord(xcenter + "," + ycenter + "," + zcenter, region.world) )
-    +removed_region
+    +removed_serv
     +"<br/>"
     +"<span style='display:inline-block;float:right;'>"+region_status+"</span>"
     +(owners!=""?"<b>Владельцы:</b>&nbsp;"+owners+"<br/>":"")
