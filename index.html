@@ -38,6 +38,7 @@
   ul#pagination li .page.current {
     font-weight: bold;
   }
+.nobr { white-space: nowrap; }
   </style>
   <script>
   function theme(theme_name) {
@@ -1110,8 +1111,8 @@ var server_worlds = {
       result += "<div class='col-sm-3'>"
         + "<h4><a href='#world/" + server['world'] + "'>" + server['name'] + "</a> <small>#" + server['id'] + "</small></h4>"
         + "<p>"
-          + "<b>Сервер:</b> " + server['server_version'] + ",&nbsp;" + server['server_type'] + "<br/>"
-          + (server['world_created'] == -1 ? "" : "<b>Открыт:</b> " + api.time(server['world_created']).replace(" ", "&nbsp;") + "<br/>")
+          + "<b>Сервер:</b> <span class='nobr'>" + server['server_version'] + ", " + server['server_type'] + "</span><br/>"
+          + (server['world_created'] == -1 ? "" : "<b>Открыт:</b> <span class='nobr'>" + api.time(server['world_created']) + "</span><br/>")
           + "<b>Название мира:</b> " + server['world'] + "<br/>"
           + "<b>IP:</b> " + server['ip'] + ":" + server['port'] + ""
         + "</p>"
