@@ -1110,8 +1110,10 @@ var server_worlds = {
       result += "<div class='col-sm-3'>"
         + "<h4><a href='#world/" + server['world'] + "'>" + server['name'] + "</a> <small>#" + server['id'] + "</small></h4>"
         + "<p>"
-          + "Minecraft " + server['server_version'] + ", " + server['server_type'] + "<br/>"
-          + "<small>" + server['ip'] + ":" + server['port'] + "</small>"
+          + "<b>Сервер:</b> " + server['server_version'] + ", " + server['server_type'] + "<br/>"
+          + (server['world_created'] ? "<b>Открыт:</b> " + api.time(server['world_created']) + "<br/>" : "")
+          + "<b>Название мира:</b> " + server['world'] + "<br/>"
+          + "<b>IP:</b> " + server['ip'] + ":" + server['port'] + ""
         + "</p>"
         + "<div class='progress'><div class='progress-bar progress-bar-" + bar + "' style='width:" + width + "%;min-width:50px;'>" + label + "</div></div>"
         + "</div>"
