@@ -313,12 +313,12 @@ function mcChat(str) {
 
 /*
 // Названия миров состоянием на 28 июня 2015
-// СЕРВЕР   SURFACE   NETHER          END              TWILIGHT FOREST
+// СЕРВЕР   SURFACE   NETHER          END              TWILIGHT FOREST  OCEAN
 // Amber    AmberR2   DIM-1           DIM1             DIM7
 // Davids   DavidsR3  DIM-1           DIM1
-// Sandbox  Sandbox   Sandbox_nether  Sandbox_the_end
+// Sandbox  Sandbox   Sandbox_nether  Sandbox_the_end                   Ocean
 */
-var worlds = ["Sandbox","DavidsR3","AmberR2","DIM-1","DIM1","DIM7"];
+var worlds = ["Sandbox","Ocean","DavidsR3","AmberR2","DIM-1","DIM1","DIM7"];
 var whitelist = new RegExp("^(" + worlds.join("|")  + ")($|_nether|_the_end)");
 
 $.ajax("http://api.ensemplix.ru/v2/server/game/", {
@@ -328,7 +328,7 @@ $.ajax("http://api.ensemplix.ru/v2/server/game/", {
     for(var x = 0; x < e.length; x++) {
       worlds.push(e[x]['world']);
     }
-    worlds = worlds.concat(["DIM7","DIM1","DIM-1"]);
+    worlds = worlds.concat(["Ocean","DIM7","DIM1","DIM-1"]);
     whitelist = new RegExp("^(" + worlds.join("|")  + ")($|_nether|_the_end)");
   }
 });
