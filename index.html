@@ -428,7 +428,7 @@ function violationsParse(response, params) {
     result += api.info(api.player(params['player'], true) + " сейчас не наказан");
   } else {
     if(response['banned']) {
-      result += api.danger("<b>" + api.player(response['banned']['player'], true) + "</b> забанен администратором <b>" + api.player(response['banned']['admin'], true) + "</b> по причине: <b>" + response['banned']['reason'] + "</b><br/>"
+      result += api.danger("<b>" + api.player(response['banned']['player'], true) + "</b> забанен администратором <b>" + api.player(response['banned']['admin'], true) + "</b> по причине: <b>" + response['banned']['reason'].replace(/[a-zA-Z0-9_]{3,20}/g, api.player("$&")) + "</b><br/>"
           + "От <b>" + api.time(response['banned']['created']) + "</b> &mdash; до <b>" + api.period(response['banned']['till']) + "</b>"
         );
     }
@@ -737,9 +737,10 @@ var blocks = {
       result += blockParse(block);
     }
 
-    result = "<style>.success a, .warning a { color: inherit; }</style><div class='panel panel-default'>" + pages_list + "<table class='table table-striped'>" + result + "</table>" + pages_list + "</div>";
+    result = "<style>.success a, .warning a { color: inherit; }</style><div class='panel panel-default'>" + pages_list + "<div class='table-responsive'><table class='table table-striped'>" + result + "</table></div>" + pages_list + "</div>";
 
     $("#output").html(result);
+    $('.item').tooltip();
   },
   'history': {}
 }
@@ -1384,15 +1385,17 @@ var server_banlist = {
     for(var x = 0; x < bans.length; x++) {
       var ban = bans[x];
 
+      ban_reason = ban['reason'].replace(/[a-zA-Z0-9_]{3,20}/g, api.player("$&"));
+
       result += "<tr>"
           + "<td>" + api.player(ban['player'], true) + "</td>"
-          + "<td>" + ban['reason'] + "</td>"
+          + "<td>" + ban_reason + "</td>"
           + "<td>" + api.till(ban['till']) + "</td>"
           + "<td>" + api.player(ban['admin'], true) + "</td>"
           + "<td>" + api.time(ban['created']) + "</td>"
         + "</tr>";
     }
-    result = "<div class='panel panel-default'>" + pages_list + "<table class='table table-striped'>" + result + "</table>" + pages_list + "</div>";
+    result = "<div class='panel panel-default'>" + pages_list + "<div class='table-responsive'><table class='table table-striped'>" + result + "</table></div>" + pages_list + "</div>";
 
     $('#output').html(result);
   },
@@ -1482,9 +1485,10 @@ var server_shops = {
           + "<td>" + api.time(item['created']) + "</td>"
         + "</tr>";
     }
-    result = "<div class='panel panel-default'>" + pages_list + "<table class='table table-striped'>" + result + "</table>" + pages_list + "</div>";
+    result = "<div class='panel panel-default'>" + pages_list + "<div class='table-responsive'><table class='table table-striped'>" + result + "</table></div>" + pages_list + "</div>";
 
     $('#output').html(result);
+    $('.item').tooltip();
   },
   'history': {}
 }
@@ -1555,9 +1559,10 @@ var server_blocks = {
       result += blockParse(block);
     }
 
-    result = "<style>.success a, .warning a { color: inherit; }</style><div class='panel panel-default'>" + pages_list + "<table class='table table-striped'>" + result + "</table>" + pages_list + "</div>";
+    result = "<style>.success a, .warning a { color: inherit; }</style><div class='panel panel-default'>" + pages_list + "<div class='table-responsive'><table class='table table-striped'>" + result + "</table></div>" + pages_list + "</div>";
 
     $('#output').html(result);
+    $('.item').tooltip();
   },
   'history': {}
 }
@@ -1732,7 +1737,7 @@ var violations = {
         );
     } else {
       if(response['banned']) {
-        result += api.danger("<b>" + api.player(response['banned']['player'], true) + "</b> забанен администратором <b>" + api.player(response['banned']['admin'], true) + "</b> по причине: <b>" + response['banned']['reason'] + "</b><br/>"
+        result += api.danger("<b>" + api.player(response['banned']['player'], true) + "</b> забанен администратором <b>" + api.player(response['banned']['admin'], true) + "</b> по причине: <b>" + response['banned']['reason'].replace(/[a-zA-Z0-9_]{3,20}/g, api.player("$&")) + "</b><br/>"
             + "От <b>" + api.time(response['banned']['created']) + "</b> &mdash; до <b>" + api.period(response['banned']['till']) + "</b>"
           );
       }
@@ -1819,9 +1824,10 @@ var coord_blocks = {
       result += blockParse(block);
     }
 
-    result = "<div class='panel panel-default'>" + pages_list + "<table class='table table-striped'>" + result + "</table>" + pages_list + "</div>";
+    result = "<div class='panel panel-default'>" + pages_list + "<div class='table-responsive'><table class='table table-striped'>" + result + "</table></div>" + pages_list + "</div>";
 
     $('#output').html(result);
+    $('.item').tooltip();
   },
   'history': {}
 }
@@ -1912,9 +1918,10 @@ var coord_shops = {
           + "<td>" + api.time(item['created']) + "</td>"
         + "</tr>";
     }
-    result = "<div class='panel panel-default'>" + pages_list + "<table class='table table-striped'>" + result + "</table>" + pages_list + "</div>";
+    result = "<div class='panel panel-default'>" + pages_list + "<div class='table-responsive'><table class='table table-striped'>" + result + "</table></div>" + pages_list + "</div>";
 
     $('#output').html(result);
+    $('.item').tooltip();
   },
   'history': {}
 }
@@ -2000,9 +2007,10 @@ var shops = {
           + "<td>" + api.time(item['created']) + "</td>"
         + "</tr>";
     }
-    result = "<div class='panel panel-default'>" + pages_list + "<table class='table table-striped'>" + result + "</table>" + pages_list + "</div>";
+    result = "<div class='panel panel-default'>" + pages_list + "<div class='table-responsive'><table class='table table-striped'>" + result + "</table></div>" + pages_list + "</div>";
 
     $('#output').html(result);
+    $('.item').tooltip();
   },
   'history': {}
 }
